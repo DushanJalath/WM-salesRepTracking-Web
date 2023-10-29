@@ -1,11 +1,12 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 
-export default function ViewSalesData() {
+export default function RepHistory() {
     const [sales, setSales] = useState([]);
-    const [contact, setContact] = useState("");
+
+    const {repId}=useParams();
 
     useEffect(() => {
         loadSales();
@@ -13,20 +14,9 @@ export default function ViewSalesData() {
     }, []);
 
     const loadSales = async () => {
-        const result = await axios.get("http://localhost:8081/getSalesData");
+        const result = await axios.get(`http://localhost:8081/getSalesData/${repId}`);
         setSales(result.data);
     }
-
-    /*const getRepContact = async (repId) => {
-        axios.get(`http://localhost:8081/getrepContact/${repId}`)
-            .then(response => {
-                setContact(response.data[0].mobileNo);
-                console.log(response.data);
-            })
-            .catch(error => {
-                console.error("Error loading sales data:", error);
-            });
-    };*/
 
     return (
         <div className="container">
@@ -41,7 +31,6 @@ export default function ViewSalesData() {
                         <th scope="col">Customer</th>
                         <th scope="col">Amount</th>
                         <th scope="col">Date and Time</th>
-                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -55,13 +44,6 @@ export default function ViewSalesData() {
                                 <td>{sales.customerId}</td>
                                 <td>{sales.amount}</td>
                                 <td>{sales.time}</td>
-                                <td>
-                                    <Link className="btn btn-sm btn-outline-primary mx-1"
-                                          to={`/salesData/${sales.salesId}`}>Edit</Link>
-                                    <button className="btn btn-sm btn-outline-danger mx-1"
-                                        /*onClick={() => deleteDoctor(sales.id)}*/>Delete
-                                    </button>
-                                </td>
                             </tr>
 
                         ))

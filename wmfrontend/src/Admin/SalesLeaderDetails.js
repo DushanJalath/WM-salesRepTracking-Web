@@ -5,20 +5,16 @@ import { Link } from "react-router-dom";
 export default function SalesLeaderDetails() {
     const [salesLeader, setSalesLeader] = useState([]);
 
-    /*useEffect(() => {
+    useEffect(() => {
         loadSalesLeader();
 
     }, []);
 
     const loadSalesLeader = async () => {
-        const result = await axios.get("http://localhost:8080/api/v1/salesLeader/getSalesLeader");
+        const result = await axios.get("http://localhost:8081/getSalesLeaders");
         setSalesLeader(result.data);
     }
 
-    const deleteDoctor = async (id) => {
-        await axios.delete(`http://localhost:8080/api/v1/salesLeader/deleteDoctor/${id}`);
-        loadSalesLeader();
-    }*/
 
     return (
         <div className="container">
@@ -33,7 +29,6 @@ export default function SalesLeaderDetails() {
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Contact</th>
-                        <th scope="col">Email</th>
                         <th scope="col">Address</th>
                         <th>Actions</th>
                     </tr>
@@ -43,9 +38,8 @@ export default function SalesLeaderDetails() {
                         <tr key={salesLeader.id}>
                             <td>{salesLeader.id}</td>
                             <td>{salesLeader.name}</td>
-                            <td>{salesLeader.contact}</td>
-                            <td>{salesLeader.email}</td>
-                            <td>{salesLeader.specialization}</td>
+                            <td>{salesLeader.mobileNo}</td>
+                            <td>{salesLeader.address}</td>
                             <td>
                                 <Link className="btn btn-sm btn-outline-primary mx-1" to={`/updateDoc/${salesLeader.id}`}>
                                     Edit
