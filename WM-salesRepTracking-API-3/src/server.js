@@ -72,6 +72,16 @@ app.get('/getrepContact', (req, res) => {
     })
 })
 
+app.get('/getrepContacts/:repId', (req, res) => {
+    const repId = req.params.repId;
+    const sql = "SELECT mobileNo FROM user WHERE id = ?"
+
+    db.query(sql,repId, (err, result) => {
+        if (err) return res.json(err)
+        return res.json(result);
+    })
+})
+
 app.get('/getSalesDataBydate/:repId', (req, res) => {
     const repId = req.params.repId;
     const currentDate = new Date().toISOString().slice(0, 10); // Get the current date in 'YYYY-MM-DD' format
