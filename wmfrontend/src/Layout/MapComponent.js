@@ -9,6 +9,7 @@ import {
 import {useJsApiLoader, GoogleMap, Marker, InfoWindow, Polyline} from "@react-google-maps/api";
 import axios from "axios";
 import {useParams} from "react-router-dom";
+import Swal from "sweetalert2";
 
 const center = {lat: 48.8584, lng: 2.2945}; // Default center
 
@@ -37,16 +38,26 @@ function MapComponent() {
                 console.error("Error loading locations:", error);
             });
 
-        axios.get(`http://localhost:8081/getSalesDataBydate/${repId}`)
-            .then(response => {
-                setSalesData(response.data[0]);
-                console.log(response.data);
+        axios
+            .get(`http://localhost:8081/getSalesDataBydate/${repId}`)
+            .then((response) => {
+                if (response.data.length === 0) {
+                    // Show SweetAlert if there's no sales data
+                    Swal.fire("No Sales Data", "There's no sales data available.", "error").then(() => {
+                        // Handle navigation when the alert is closed
+                        // You can adjust the navigation URL as needed
+                        window.history.back(); // Navigate to the previous page
+                    });
+                } else {
+                    setSalesData(response.data[0]);
+                    console.log(response.data);
+                }
             })
-            .catch(error => {
+            .catch((error) => {
                 console.error("Error loading sales data:", error);
             });
 
-        axios.get(`http://localhost:8081/getrepContact/${repId}`)
+        axios.get(`http://localhost:8081/getrepContacts/${repId}`)
             .then(response => {
                 setContact(response.data[0].mobileNo);
                 console.log(response.data);

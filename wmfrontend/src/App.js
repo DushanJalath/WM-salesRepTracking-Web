@@ -54,7 +54,7 @@ function App() {
                     }/>
                     <Route path={`/mapLocation/:repId`} element={
                         <div className={"row"}>
-                            <NavBar isAuthenticated={true} userRole={"admin"}/>
+                            <NavBar isAuthenticated={true} userRole={"leader"}/>
                             <MapComponent/>
                         </div>
                     }/>
