@@ -12,13 +12,14 @@ export default function UpdateUserDetails() {
         id: 0,
         name: "",
         userName: "",
+        pw: "",
         mobileNo: "",
         address: "",
         type: "",
         managerId: 0
     });
 
-    const {name, userName, mobileNo, address, type, managerId} = users;
+    const {name, userName,pw, mobileNo, address, type, managerId} = users;
     const onInputChange = (e) => {
         setUser({
             ...users,
@@ -110,6 +111,19 @@ export default function UpdateUserDetails() {
                                 placeholder="Enter your userName"
                                 name="userName"
                                 value={userName}
+                                onChange={(e) => onInputChange(e)}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="pw" className="form-label">
+                                Password
+                            </label>
+                            <input
+                                type={"text"}
+                                className="form-control"
+                                placeholder="Enter your password"
+                                name="pw"
+                                value={pw}
                                 onChange={(e) => onInputChange(e)}
                             />
                         </div>

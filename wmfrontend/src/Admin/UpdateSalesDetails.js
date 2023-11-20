@@ -44,7 +44,7 @@ export default function UpdateSalesDetails() {
             if (result.isConfirmed) {
                 await Swal.fire(
                     'Saved!',
-                    'Your sales data has been updated.',
+                    'User has been updated.',
                     'success'
                 )
                 await axios.put(`https://maxol-sales-rep-track-api-akk9s.ondigitalocean.app/updateSales`, sales, {

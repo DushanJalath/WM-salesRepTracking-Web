@@ -17,12 +17,20 @@ export default function ViewSalesData() {
     }, []);
 
     const loadSales = async () => {
-        const result = await axios.get("https://maxol-sales-rep-track-api-akk9s.ondigitalocean.app/getSalesData", {
-            headers:{
-                'access-token' : localStorage.getItem("token")
-            }
-        });
-        setSales(result.data);
+        try {
+            const result = await axios.get("https://maxol-sales-rep-track-api-akk9s.ondigitalocean.app/getSalesData", {
+                headers: {
+                    'access-token': localStorage.getItem("token")
+                }
+            });
+
+            // Sort the sales data by date and time in descending order
+            const sortedSales = result.data.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+            setSales(sortedSales);
+        } catch (error) {
+            console.error("Error loading sales data:", error);
+        }
     }
 
     const fetchRepContacts = async () => {

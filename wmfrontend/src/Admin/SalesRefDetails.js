@@ -39,7 +39,7 @@ export default function SalesRefDetails() {
             if (result.isConfirmed) {
                 // User confirmed the deletion, send the delete request
                 try {
-                    await axios.put(`https://maxol-sales-rep-track-api-akk9s.ondigitalocean.app/deletUser/${id}`, {
+                    await axios.put(`https://maxol-sales-rep-track-api-akk9s.ondigitalocean.app/deleteUser/${id}`, {
                         headers: {
                             'access-token': localStorage.getItem("token")
                         }
@@ -69,7 +69,7 @@ export default function SalesRefDetails() {
                     fontWeight: "bolder"
                 }}>
                     <h3></h3>
-                    <Link to="/addSalesRef" className="obtn">Add Sales Ref</Link>
+                    <Link to="/addSalesRef" className="obtn">Add Sales Representative</Link>
                 </div>
                 <table className="table border shadow">
                     <thead>
@@ -95,6 +95,9 @@ export default function SalesRefDetails() {
                                     <Link className="btn btn-sm btn-outline-primary mx-1"
                                           to={`/UserUpdate/${salesRefs.id}`}>
                                         Edit
+                                    </Link>
+                                    <Link className="btn btn-sm btn-outline-success mx-1" to={`/mapLocation/${salesRefs.id}`}>
+                                        Location
                                     </Link>
                                     <button className="btn btn-sm btn-outline-danger mx-1"
                                             onClick={() => deleteSalesRep(salesRefs.id)}>

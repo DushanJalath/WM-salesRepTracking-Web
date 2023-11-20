@@ -53,11 +53,7 @@ function MapComponent() {
             .then((response) => {
                 if (response.data.length === 0) {
                     // Show SweetAlert if there's no sales data
-                    Swal.fire("No Sales Data", "There's no sales data available.", "error").then(() => {
-                        // Handle navigation when the alert is closed
-                        // You can adjust the navigation URL as needed
-                        window.history.back(); // Navigate to the previous page
-                    });
+                    Swal.fire("No Sales Data", "There's no sales data available.", "error");
                 } else {
                     setSalesData(response.data[0]);
                     console.log(response.data);
